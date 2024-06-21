@@ -1,6 +1,6 @@
 //
 // Blackfriday Markdown Processor
-// Available at http://github.com/russross/blackfriday
+// Available at http://github.com/heketong/MarkdownToHtml
 //
 // Copyright © 2011 Russ Ross <russ@russross.com>.
 // Distributed under the Simplified BSD License.
@@ -11,7 +11,7 @@
 // Unit tests for inline parsing
 //
 
-package blackfriday
+package MarkdownToHtml
 
 import (
 	"regexp"
@@ -564,7 +564,7 @@ func TestInlineLink(t *testing.T) {
 		"[link](<../>)\n",
 		"<p><a href=\"../\">link</a></p>\n",
 
-		// Issue 116 in blackfriday
+		// Issue 116 in MarkdownToHtml
 		"![](http://www.broadgate.co.uk/Content/Upload/DetailImages/Cyclus700(1).jpg)",
 		"<p><img src=\"http://www.broadgate.co.uk/Content/Upload/DetailImages/Cyclus700(1).jpg\" alt=\"\" /></p>\n",
 

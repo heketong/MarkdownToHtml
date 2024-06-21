@@ -21,13 +21,13 @@ Installation
 Blackfriday is compatible with modern Go releases in module mode.
 With Go installed:
 
-    go get github.com/russross/blackfriday
+    go get github.com/heketong/MarkdownToHtml
 
 will resolve and add the package to the current development module,
 then build and install it. Alternatively, you can achieve the same
 if you import it in a package:
 
-    import "github.com/russross/blackfriday"
+    import "github.com/heketong/MarkdownToHtml"
 
 and `go get` without parameters.
 
@@ -39,11 +39,11 @@ Versions
 --------
 
 Currently maintained and recommended version of Blackfriday is `v2`. It's being
-developed on its own branch: https://github.com/russross/blackfriday/tree/v2 and the
+developed on its own branch: https://github.com/heketong/MarkdownToHtml/tree/v2 and the
 documentation is available at
-https://pkg.go.dev/github.com/russross/blackfriday/v2.
+https://pkg.go.dev/github.com/heketong/MarkdownToHtml/v2.
 
-It is `go get`-able in module mode at `github.com/russross/blackfriday/v2`.
+It is `go get`-able in module mode at `github.com/heketong/MarkdownToHtml/v2`.
 
 Version 2 offers a number of improvements over v1:
 
@@ -60,12 +60,12 @@ Potential drawbacks:
 * API breakage. If you can't afford modifying your code to adhere to the new API
   and don't care too much about the new features, v2 is probably not for you.
 * Several bug fixes are trailing behind and still need to be forward-ported to
-  v2. See issue [#348](https://github.com/russross/blackfriday/issues/348) for
+  v2. See issue [#348](https://github.com/heketong/MarkdownToHtml/issues/348) for
   tracking.
 
 If you are still interested in the legacy `v1`, you can import it from
-`github.com/russross/blackfriday`. Documentation for the legacy v1 can be found
-here: https://pkg.go.dev/github.com/russross/blackfriday.
+`github.com/heketong/MarkdownToHtml`. Documentation for the legacy v1 can be found
+here: https://pkg.go.dev/github.com/heketong/MarkdownToHtml.
 
 
 Usage
@@ -77,14 +77,14 @@ For basic usage, it is as simple as getting your input into a byte
 slice and calling:
 
 ```go
-output := blackfriday.MarkdownBasic(input)
+output := MarkdownToHtml.MarkdownBasic(input)
 ```
 
 This renders it with no extensions enabled. To get a more useful
 feature set, use this instead:
 
 ```go
-output := blackfriday.MarkdownCommon(input)
+output := MarkdownToHtml.MarkdownCommon(input)
 ```
 
 ### v2
@@ -93,7 +93,7 @@ For the most sensible markdown processing, it is as simple as getting your input
 into a byte slice and calling:
 
 ```go
-output := blackfriday.Run(input)
+output := MarkdownToHtml.Run(input)
 ```
 
 Your input will be parsed and the output rendered with a set of most popular
@@ -101,7 +101,7 @@ extensions enabled. If you want the most basic feature set, corresponding with
 the bare Markdown specification, use:
 
 ```go
-output := blackfriday.Run(input, blackfriday.WithNoExtensions())
+output := MarkdownToHtml.Run(input, MarkdownToHtml.WithNoExtensions())
 ```
 
 ### Sanitize untrusted content
@@ -115,11 +115,11 @@ Here's an example of simple usage of Blackfriday together with Bluemonday:
 ```go
 import (
     "github.com/microcosm-cc/bluemonday"
-    "github.com/russross/blackfriday"
+    "github.com/heketong/MarkdownToHtml"
 )
 
 // ...
-unsafe := blackfriday.Run(input)
+unsafe := MarkdownToHtml.Run(input)
 html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
 ```
 
@@ -133,26 +133,26 @@ implementations of `MarkdownBasic` and `MarkdownCommon` in
 
 ### Custom options, v2
 
-If you want to customize the set of options, use `blackfriday.WithExtensions`,
-`blackfriday.WithRenderer` and `blackfriday.WithRefOverride`.
+If you want to customize the set of options, use `MarkdownToHtml.WithExtensions`,
+`MarkdownToHtml.WithRenderer` and `MarkdownToHtml.WithRefOverride`.
 
-### `blackfriday-tool`
+### `MarkdownToHtml-tool`
 
-You can also check out `blackfriday-tool` for a more complete example
+You can also check out `MarkdownToHtml-tool` for a more complete example
 of how to use it. Download and install it using:
 
-    go get github.com/russross/blackfriday-tool
+    go get github.com/heketong/MarkdownToHtml-tool
 
 This is a simple command-line tool that allows you to process a
 markdown file using a standalone program.  You can also browse the
 source directly on github if you are just looking for some example
 code:
 
-* <https://github.com/russross/blackfriday-tool>
+* <https://github.com/heketong/MarkdownToHtml-tool>
 
 Note that if you have not already done so, installing
-`blackfriday-tool` will be sufficient to download and install
-blackfriday in addition to the tool itself. The tool binary will be
+`MarkdownToHtml-tool` will be sufficient to download and install
+MarkdownToHtml in addition to the tool itself. The tool binary will be
 installed in `$GOPATH/bin`.  This is a statically-linked binary that
 can be copied to wherever you need it without worrying about
 dependencies and library versions.
@@ -165,13 +165,13 @@ anchors for headings when `EXTENSION_AUTO_HEADER_IDS` is enabled. The
 algorithm has a specification, so that other packages can create
 compatible anchor names and links to those anchors.
 
-The specification is located at https://pkg.go.dev/github.com/russross/blackfriday#hdr-Sanitized_Anchor_Names.
+The specification is located at https://pkg.go.dev/github.com/heketong/MarkdownToHtml#hdr-Sanitized_Anchor_Names.
 
-[`SanitizedAnchorName`](https://pkg.go.dev/github.com/russross/blackfriday#SanitizedAnchorName) exposes this functionality, and can be used to
-create compatible links to the anchor names generated by blackfriday.
+[`SanitizedAnchorName`](https://pkg.go.dev/github.com/heketong/MarkdownToHtml#SanitizedAnchorName) exposes this functionality, and can be used to
+create compatible links to the anchor names generated by MarkdownToHtml.
 This algorithm is also implemented in a small standalone package at
 [`github.com/shurcooL/sanitized_anchor_name`](https://pkg.go.dev/github.com/shurcooL/sanitized_anchor_name). It can be useful for clients
-that want a small package and don't need full functionality of blackfriday.
+that want a small package and don't need full functionality of MarkdownToHtml.
 
 
 Features
@@ -181,7 +181,7 @@ All features of Sundown are supported, including:
 
 *   **Compatibility**. The Markdown v1.0.3 test suite passes with
     the `--tidy` option.  Without `--tidy`, the differences are
-    mostly in whitespace and entity escaping, where blackfriday is
+    mostly in whitespace and entity escaping, where MarkdownToHtml is
     more consistent and cleaner.
 
 *   **Common extensions**, including table support, fenced code
@@ -195,7 +195,7 @@ All features of Sundown are supported, including:
 
     NOTE: "safety" in this context means *runtime safety only*. In order to
     protect yourself against JavaScript injection in untrusted content, see
-    [this example](https://github.com/russross/blackfriday#sanitize-untrusted-content).
+    [this example](https://github.com/heketong/MarkdownToHtml#sanitize-untrusted-content).
 
 *   **Fast processing**. It is fast enough to render on-demand in
     most web applications without having to cache the output.
@@ -322,7 +322,7 @@ are a few of note:
 *   [markdownfmt](https://github.com/shurcooL/markdownfmt): like gofmt,
     but for markdown.
 
-*   [LaTeX output](https://gitlab.com/ambrevar/blackfriday-latex):
+*   [LaTeX output](https://gitlab.com/ambrevar/MarkdownToHtml-latex):
     renders output as LaTeX.
 
 *   [bfchroma](https://github.com/Depado/bfchroma/): provides convenience
@@ -331,9 +331,9 @@ are a few of note:
     provides a drop-in renderer ready to use with Blackfriday, as well as
     options and means for further customization.
 
-*   [Blackfriday-Confluence](https://github.com/kentaro-m/blackfriday-confluence): provides a [Confluence Wiki Markup](https://confluence.atlassian.com/doc/confluence-wiki-markup-251003035.html) renderer.
+*   [Blackfriday-Confluence](https://github.com/kentaro-m/MarkdownToHtml-confluence): provides a [Confluence Wiki Markup](https://confluence.atlassian.com/doc/confluence-wiki-markup-251003035.html) renderer.
 
-*   [Blackfriday-Slack](https://github.com/karriereat/blackfriday-slack): converts markdown to slack message style
+*   [Blackfriday-Slack](https://github.com/karriereat/MarkdownToHtml-slack): converts markdown to slack message style
 
 
 TODO
@@ -355,10 +355,10 @@ License
    [1]: https://daringfireball.net/projects/markdown/ "Markdown"
    [2]: https://golang.org/ "Go Language"
    [3]: https://github.com/vmg/sundown "Sundown"
-   [4]: https://pkg.go.dev/github.com/russross/blackfriday/v2#Parse "Parse func"
+   [4]: https://pkg.go.dev/github.com/heketong/MarkdownToHtml/v2#Parse "Parse func"
    [5]: https://github.com/microcosm-cc/bluemonday "Bluemonday"
 
-   [BuildV2SVG]: https://travis-ci.org/russross/blackfriday.svg?branch=v2
-   [BuildV2URL]: https://travis-ci.org/russross/blackfriday
-   [PkgGoDevV2SVG]: https://pkg.go.dev/badge/github.com/russross/blackfriday/v2
-   [PkgGoDevV2URL]: https://pkg.go.dev/github.com/russross/blackfriday/v2
+   [BuildV2SVG]: https://travis-ci.org/russross/MarkdownToHtml.svg?branch=v2
+   [BuildV2URL]: https://travis-ci.org/russross/MarkdownToHtml
+   [PkgGoDevV2SVG]: https://pkg.go.dev/badge/github.com/heketong/MarkdownToHtml/v2
+   [PkgGoDevV2URL]: https://pkg.go.dev/github.com/heketong/MarkdownToHtml/v2

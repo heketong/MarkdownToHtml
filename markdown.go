@@ -1,6 +1,6 @@
 //
 // Blackfriday Markdown Processor
-// Available at http://github.com/russross/blackfriday
+// Available at http://github.com/heketong/MarkdownToHtml
 //
 // Copyright © 2011 Russ Ross <russ@russross.com>.
 // Distributed under the Simplified BSD License.
@@ -13,7 +13,7 @@
 //
 //
 
-package blackfriday
+package MarkdownToHtml
 
 import (
 	"bytes"
